@@ -26,6 +26,7 @@
 .main__mid {
   display: flex;
   flex-direction: column;
+  padding: 12px;
 }
 
 .cards__container {
@@ -33,17 +34,16 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 18px;
-  padding: 12px;
 }
 
 /* single card */
 .card {
-  width: 380px;
+  width: 360px;
   height: 260px;
   border-radius: var(--radius);
   display: flex;
   flex-direction: column;
-  border: 2px solid white;
+  border: 2px solid rgba(109, 109, 109, 0.494);
 }
 
 .card:hover {
@@ -61,6 +61,8 @@
   object-fit: cover;
   border-radius: var(--radius);
 }
+
+
 
 .card__info {
   height: 25%;
