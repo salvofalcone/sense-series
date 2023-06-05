@@ -1,0 +1,33 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: sticky;
+  top: 0;
+  height: var(--nav-height);
+
+  background-color: var(--color-main);
+  padding: 12px;
+}
+
+.nav__list {
+  list-style-type: none;
+  display: flex;
+  gap: var(--gap);
+}
+
+.nav__list a {
+  text-decoration: none;
+  color: var(--color-grey);
+}
+
+.nav__list a:hover {
+  color: var(--color-white);
+  transition: 450ms ease;
+}
+
+.header__profile {
+  display: flex;
+  gap: var(--gap);
+}
