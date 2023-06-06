@@ -1,0 +1,51 @@
+.tvDetails, .main__bottom {
+  border: 2px solid red;
+
+  height: 100vh;
+  width: 100vw;
+  padding: 12px;
+  display: flex;
+}
+
+.left {
+  border: 2px solid orange;
+
+  width: 60%;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+  gap: 10px;
+}
+
+.left__top {
+  border: 2px solid yellow;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lt__info {
+  border: 2px solid red;
+  display: flex;
+  gap: 10px;
+}
+
+.right {
+  border: 2px solid azure;
+
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.poster__img{
+  width: 300px;
+}

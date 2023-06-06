@@ -34,6 +34,11 @@ header {
   gap: var(--gap);
 }
 
+/* TODO Spostare questa dentro l'h1 */
+.main__title{
+  cursor: pointer;
+}
+
 /* input search bar */
 
 .container {

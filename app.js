@@ -9,17 +9,20 @@ import {
   GET,
   createCard,
   removeAllChildNodes,
+  genToString,
 } from "./utils/fn.js";
 
 //==========================================================================
 
 let apiData = [];
 let localData = [];
-let genres = [];
+export let genres = [];
+
 let language = "en-US"; //TODO scelta della lingua
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const TYPE = "/trending";
+const home = qS(".main__title");
 const container = qS(".cards__container");
 const titleEl = qS(".section__title");
 const topRatedEl = qS("#topRated");
@@ -50,18 +53,21 @@ const searchEl = qS("#search");
 
 const getGenres = () => {
   const genresEl = qS(".main__genres");
-  genres.forEach((option) => {
-    const optionEl = createEl("li", option.name, {
+
+  Object.entries(genres).forEach(([key, value]) => {
+    const optionEl = createEl("li", value, {
       name: "value",
-      value: option.id,
+      value: key,
     });
+
+    // console.log(genres);
 
     genresEl.append(optionEl);
   });
 
-  genres.forEach((el)=>{
-    console.log(genres);
-  })
+  // genres.forEach((el) => {
+  //   console.log(genres);
+  // });
 
   genresEl.addEventListener("click", (e) => {
     let endpoint = e.target.value;
@@ -75,10 +81,13 @@ const startApp = () => {
     .then((response) => response.json())
     .then((response) => {
       response.genres.forEach((gen) => {
-        genres.push({
-          id: gen.id,
-          name: gen.name,
-        });
+        //! fatto con Stefano
+        genres = { ...genres, [gen.id]: gen.name };
+
+        // genres.push({
+        //   id: gen.id,
+        //   name: gen.name,
+        // });
       });
     })
     .then(() => {
@@ -97,7 +106,7 @@ const startApp = () => {
           title: element.name,
           original_title: element.original_name,
           year: element.first_air_date,
-          genres: element.genre_ids,
+          genres: element.genre_ids, //!
           language: element.original_language,
           country: element.origin_country,
           overview: element.overview,
@@ -111,7 +120,6 @@ const startApp = () => {
     })
     .then(() => {
       titleEl.textContent = "Trending";
-      // console.log(localData)
       localData.forEach((element) => {
         createCard(element);
       });
@@ -252,6 +260,11 @@ startApp();
 
 //==========================================================================
 
+// home.addEventListener("click", () => {
+//   removeAllChildNodes(container);
+//   startApp();
+// });
+
 topRatedEl.addEventListener("click", () => {
   titleEl.textContent = "Top Rated";
   homeByTopRated();
@@ -276,3 +289,13 @@ searchEl.addEventListener("input", (e) => {
 });
 
 //==========================================================================
+
+//fetch per generi
+// fetch("https://api.themoviedb.org/3/genre/tv/list?language=en", GET)
+//   .then((response) => response.json())
+//   .then((response) => console.log(response))
+//   .catch((err) => console.error(err));
+
+
+
+
