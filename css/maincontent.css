@@ -38,53 +38,74 @@
 
 /* single card */
 .card {
-  width: 360px;
-  height: 290px;
-  border-radius: var(--radius);
+  position: relative;
   display: flex;
   flex-direction: column;
-  border: 2px solid rgba(109, 109, 109, 0.494);
-  box-shadow: 5px 5px 5px #47474762; /* ! SISTEMARE */
+  width: 360px;
+  height: 200px;
+  border-radius: var(--radius);
+
+  /* ! Sistemare */
+  /* border: 2px solid rgba(109, 109, 109, 0.494); */
+  /* box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); */
 }
 
 .card:hover {
+  border: 1px solid rgba(109, 109, 109, 0.3);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+
+  /* ! Sistemare */
+  /*
   transform: scale(1.02);
   transition: 450ms ease;
+  */
 }
 
 .card__banner {
   width: 100%;
-  height: 75%;
+  height: 100%;
 }
 
 .card__banner img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-top-left-radius: var(--radius);
-  border-top-right-radius: var(--radius);
+  border-radius: var(--radius);
 }
 
-
 .card__info {
-  height: 25%;
-  padding: 6px;
   display: flex;
   flex-direction: column;
-  /* ! Sistemare overflow */
+
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  padding: 6px 6px 12px;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+
+  color: var(--color-white);
+  /* background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)); */
+
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3.5px);
+  -webkit-backdrop-filter: blur(3.5px);
 }
 
 .card__title {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 
 .card__info__details {
+  font-size: 0.8rem;
   display: flex;
   justify-content: space-between;
 }
 
 .active {
-  border: 2px solid red;
+  background-color: red;
 }
 
 /* End single card */

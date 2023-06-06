@@ -3,7 +3,7 @@
 @import "./maincontent.css";
 @import "./sidebar.css";
 
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400&display=swap");
 
 * {
   margin: 0;
@@ -12,11 +12,12 @@
 }
 
 body {
-  font-family: "DM Sans", sans-serif;
+  font-family: "Montserrat", sans-serif;
   background-color: var(--color-main);
   color: var(--color-white);
   font-size: 16px;
 }
+
 .main__container {
   max-width: 1440px;
   margin: 0 auto;
