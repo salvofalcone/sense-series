@@ -8,6 +8,7 @@
     <title>Sense Series</title>
     <link rel="stylesheet" href="./css/main.css">
     <script src="./app.js" type="module"></script>
+    <script src="./utils/switch.js" type="module"></script>
 </head>
 
 <body>
@@ -20,15 +21,16 @@
 
             <nav class="nav">
                 <ul class="nav__list">
-                    <li class="nav__list__item"><a href="#">Movies</a></li>
-                    <li class="nav__list__item"><a href="#">Tv Shows</a></li>
-                    <li class="nav__list__item"><a href="#">Animations</a></li>
-                    <li class="nav__list__item"><a href="#">Plans</a></li>
+                    <li class="nav__list__item active" id="trending"><a href="#">Trending</a></li>
+                    <li class="nav__list__item" id="topRated"><a href="#">Top Rated</a></li>
+                    <li class="nav__list__item" id="newest"><a href="#">Newest</a></li>
+                    <!-- <li class="nav__list__item" id="today"><a href="#">Today</a></li> -->
+                   <!--  <li class="nav__list__item"><select class="genres__main"></select></li> --> <!-- TODO decidere come gestire i generi -->
                 </ul>
             </nav>
 
             <div class="header__profile">
-                <div>cerca</div>
+                <div><input type="text" name="search" id="search"></div>
                 <div>profilo</div>
             </div>
 
@@ -38,14 +40,17 @@
         <!-- main content -->
         <div class="main__content">
 
-            <div class="info__section">Info section (sidebar) </div>
+            <div class="info__section">
+                <ul class="main__genres"></ul>
+            </div>
+
             <div class="main__section">
-                <div class="main__top">
+                <!-- <div class="main__top">
                     ZONA TOP MAIN
-                </div>
+                </div> -->
 
                 <div class="main__mid">
-                    <h2>Best Rating</h2>
+                    <h2 class="section__title"></h2>
 
                     <div class="cards__container">
                         <!-- ! ogni singola card viene inserita dinamicamente -->
@@ -53,9 +58,9 @@
 
                 </div>
 
-                <div class="main__bottom">
+                <!-- <div class="main__bottom">
                     ZONA BOTTOM MAIN
-                </div>
+                </div> -->
             </div>
 
         </div>
