@@ -43,6 +43,7 @@
   flex-direction: column;
   width: 360px;
   height: 200px;
+  cursor: pointer;
   border-radius: var(--radius);
 
   /* ! Sistemare */
@@ -92,6 +93,8 @@
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(3.5px);
   -webkit-backdrop-filter: blur(3.5px);
+
+  text-shadow: 0px 4px 7px rgb(0, 0, 0);
 }
 
 .card__title {
@@ -105,7 +108,7 @@
 }
 
 .active {
-  background-color: red;
+  border: 1px solid red;
 }
 
 /* End single card */

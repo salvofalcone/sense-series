@@ -4,6 +4,7 @@
 @import "./sidebar.css";
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap");
 
 * {
   margin: 0;
@@ -16,6 +17,17 @@ body {
   background-color: var(--color-main);
   color: var(--color-white);
   font-size: 16px;
+}
+
+h1 {
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  margin: 40px auto;
+  font-weight: bold;
+  color: #971a1a;
+  text-align: center;
+  letter-spacing: -2.5px;
+  text-shadow: -1px -1px 3px #020202, 2px 2px 4px #1b1b1b;
 }
 
 .main__container {

@@ -50,7 +50,6 @@ const searchEl = qS("#search");
 
 const getGenres = () => {
   const genresEl = qS(".main__genres");
-
   genres.forEach((option) => {
     const optionEl = createEl("li", option.name, {
       name: "value",
@@ -60,6 +59,10 @@ const getGenres = () => {
     genresEl.append(optionEl);
   });
 
+  genres.forEach((el)=>{
+    console.log(genres);
+  })
+
   genresEl.addEventListener("click", (e) => {
     let endpoint = e.target.value;
     homeByGenre(endpoint);
@@ -67,6 +70,22 @@ const getGenres = () => {
 };
 
 const startApp = () => {
+  //fetch generi
+  fetch(`${BASE_URL}/genre/tv/list?language=${language}`, GET)
+    .then((response) => response.json())
+    .then((response) => {
+      response.genres.forEach((gen) => {
+        genres.push({
+          id: gen.id,
+          name: gen.name,
+        });
+      });
+    })
+    .then(() => {
+      getGenres();
+    })
+    .catch((err) => console.error(err));
+
   //fetch per la home come pagina iniziale
   fetch(`${BASE_URL}${TYPE}/tv/day?language=${language}`, GET)
     .then((response) => response.json())
@@ -92,26 +111,10 @@ const startApp = () => {
     })
     .then(() => {
       titleEl.textContent = "Trending";
+      // console.log(localData)
       localData.forEach((element) => {
         createCard(element);
       });
-    })
-    .catch((err) => console.error(err));
-
-  //fetch generi
-  fetch(`${BASE_URL}/genre/tv/list?language=${language}`, GET)
-    .then((response) => response.json())
-    .then((response) => {
-      response.genres.forEach((gen) => {
-        genres.push({
-          id: gen.id,
-          name: gen.name,
-        });
-      });
-    })
-    .then(() => {
-      // getGenres();
-      getGenres(); //li crea nel menu a tendina
     })
     .catch((err) => console.error(err));
 };
@@ -259,11 +262,13 @@ newestEl.addEventListener("click", () => {
   homeByNewest();
 });
 
-/* todayEl.addEventListener("click", () => {
+/* 
+  todayEl.addEventListener("click", () => {
   titleEl.textContent="On air today"
   homeByToday();
-});
- */
+  });
+*/
+
 searchEl.addEventListener("input", (e) => {
   if (e.target.value.length >= 4) {
     homeBySearch(e.target.value);

@@ -58,6 +58,7 @@ export function createCard(plh) {
     name: "class",
     value: "card__genres",
   });
+  
   const cardRating = createEl("p", plh.rating, {
     name: "class",
     value: "card__rating",
