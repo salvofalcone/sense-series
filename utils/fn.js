@@ -1,4 +1,6 @@
-// import { appendPage } from "./page.js";
+import { genres } from "../app.js";
+
+//==========================================================================
 
 export const qS = (element) => document.querySelector(element);
 export const qSA = (elements) => document.querySelectorAll(elements);
@@ -11,17 +13,7 @@ export const createEl = (type, content, ...attrs) => {
   return element;
 };
 
-import { genres } from "../app.js";
-
-/* 
-export const GET = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: "Bearer 442ddf5ea1e360b32a7f5a8941b4a405",
-  },
-};
-*/
+//==========================================================================
 
 export const GET = {
   method: "GET",
@@ -105,107 +97,7 @@ export function removeAllChildNodes(parent) {
   }
 }
 
-//!da sistemare
-const GENRES = {
-  10759: "Action & Adventure",
-  16: "Animation",
-  35: "Comedy",
-  80: "Crime",
-  99: "Documentary",
-  18: "Drama",
-  10751: "Family",
-  10762: "Kids",
-  9648: "Mystery",
-  10763: "News",
-  10764: "Reality",
-  10765: "Sci-Fi & Fantasy",
-  10766: "Soap",
-  10767: "Talk",
-  10768: "War & Politics",
-  37: "Western",
-};
-
-export const genToString = (id) => GENRES[id] || "Not found";
-
-// export const genToString = (plh) => {
-//   const allGens = [
-//     {
-//       id: 10759,
-//       name: "Action & Adventure",
-//     },
-//     {
-//       id: 16,
-//       name: "Animation",
-//     },
-//     {
-//       id: 35,
-//       name: "Comedy",
-//     },
-//     {
-//       id: 80,
-//       name: "Crime",
-//     },
-//     {
-//       id: 99,
-//       name: "Documentary",
-//     },
-//     {
-//       id: 18,
-//       name: "Drama",
-//     },
-//     {
-//       id: 10751,
-//       name: "Family",
-//     },
-//     {
-//       id: 10762,
-//       name: "Kids",
-//     },
-//     {
-//       id: 9648,
-//       name: "Mystery",
-//     },
-//     {
-//       id: 10763,
-//       name: "News",
-//     },
-//     {
-//       id: 10764,
-//       name: "Reality",
-//     },
-//     {
-//       id: 10765,
-//       name: "Sci-Fi & Fantasy",
-//     },
-//     {
-//       id: 10766,
-//       name: "Soap",
-//     },
-//     {
-//       id: 10767,
-//       name: "Talk",
-//     },
-//     {
-//       id: 10768,
-//       name: "War & Politics",
-//     },
-//     {
-//       id: 37,
-//       name: "Western",
-//     },
-//   ];
-
-//   console.log(plh);
-//   let genere = allGens.find((el) => el.id === plh[0]);
-//   return genere.name;
-
-//   // allGens.forEach((el) => {
-//   //   if (plh === el.id) {
-//   //     // console.log(el.name);
-//   //     return el.name;
-//   //   }
-//   // });
-// };
+export const genToString = (id) => genres[id] || "Not found";
 
 export const getDetails = (plh) => {
   fetch(
@@ -213,7 +105,14 @@ export const getDetails = (plh) => {
   )
     .then((response) => response.json())
     .then((data) => {
-      //* archivio i dati che mi servono
+      /*
+      * archivio i dati che mi servono
+
+      TODO posso rimuovere questo container e usare direttamente "data" da passare e salvare nel local storage => invoco la funzione nella nuova pagina e prendo i dati da local storage per stampare dettagli serie tv
+      
+      TODO al click per chiudere la finestra e tornare alla home devo svuotare il local storage - oppure svuoto subito dopo aver appeso? (forse scomodo se faccio refresh perché perdo tutto)
+      */
+
       let container = {
         id: data.id,
         homepage: data.homepage,
@@ -240,80 +139,80 @@ export const getDetails = (plh) => {
         vote_count: data.vote_count,
       };
 
+      //! devo salvare questo
       createPage(data);
       // window.open("./page.html", "_blank");
     })
     .catch((error) => console.log(error));
 };
 
-// const parentEl = document.querySelector(".tvDetails");
+// //* questa dovrebbe andare nella pagina nuova
+// export const createPage = (plh) => {
+//   const parentEl = qS(".main__bottom");
 
-export const createPage = (plh) => {
-  const parentEl = qS(".main__bottom");
+//   const leftEl = createEl("div", "", { name: "class", value: "left" });
+//   const rightEl = createEl("div", "", { name: "class", value: "right" });
 
-  const leftEl = createEl("div", "", { name: "class", value: "left" });
-  const rightEl = createEl("div", "", { name: "class", value: "right" });
+//   const posterEl = createEl(
+//     "img",
+//     "",
+//     {
+//       name: "src",
+//       value: "https://image.tmdb.org/t/p/original/" + plh.poster_path,
+//     },
+//     { name: "class", value: "poster__img" }
+//   );
 
-  const posterEl = createEl(
-    "img",
-    "",
-    {
-      name: "src",
-      value: "https://image.tmdb.org/t/p/original/" + plh.poster_path,
-    },
-    { name: "class", value: "poster__img" }
-  );
+//   const leftTopEl = createEl("div", "", { name: "class", value: "left__top" });
+//   const ratStatEl = createEl("div", "", { name: "class", value: "lt__info" });
+//   const yeaGenEl = createEl("div", "", { name: "class", value: "lt__info" });
+//   const titleEl = createEl("h2", plh.original_name, {
+//     name: "class",
+//     value: "details__title",
+//   });
+//   const overviewEl = createEl("p", plh.overview, {
+//     name: "class",
+//     value: "details__overview",
+//   });
+//   const buttonEl = createEl("button", "guarda ora", {
+//     name: "class",
+//     value: "details__button",
+//   });
 
-  const leftTopEl = createEl("div", "", { name: "class", value: "left__top" });
-  const ratStatEl = createEl("div", "", { name: "class", value: "lt__info" });
-  const yeaGenEl = createEl("div", "", { name: "class", value: "lt__info" });
-  const titleEl = createEl("h2", plh.original_name, {
-    name: "class",
-    value: "details__title",
-  });
-  const overviewEl = createEl("p", plh.overview, {
-    name: "class",
-    value: "details__overview",
-  });
-  const buttonEl = createEl("button", "guarda ora", {
-    name: "class",
-    value: "details__button",
-  });
+//   const ratingEl = createEl("p", plh.vote_average, {
+//     name: "class",
+//     value: "details__rating",
+//   });
+//   const statusEl = createEl("p", plh.status, {
+//     name: "class",
+//     value: "details__status",
+//   });
+//   const yearEl = createEl("p", plh.first_air_date, {
+//     name: "class",
+//     value: "details__year",
+//   });
 
-  const ratingEl = createEl("p", plh.vote_average, {
-    name: "class",
-    value: "details__rating",
-  });
-  const statusEl = createEl("p", plh.status, {
-    name: "class",
-    value: "details__status",
-  });
-  const yearEl = createEl("p", plh.first_air_date, {
-    name: "class",
-    value: "details__year",
-  });
+//   //! fix
+//   const genresEl = createEl("p", plh.genres, {
+//     name: "class",
+//     value: "details__genres",
+//   });
 
-  //! fix
-  const genresEl = createEl("p", plh.genres, {
-    name: "class",
-    value: "details__genres",
-  });
+//   const taglineEl = createEl("p", plh.tagline, {
+//     name: "class",
+//     value: "details__tagline",
+//   });
 
-  const taglineEl = createEl("p", plh.tagline, {
-    name: "class",
-    value: "details__tagline",
-  });
+//   ratStatEl.append(ratingEl, statusEl);
+//   yeaGenEl.append(yearEl, genresEl);
+//   leftTopEl.append(ratStatEl, yeaGenEl, titleEl, overviewEl, buttonEl);
+//   leftEl.append(leftTopEl);
+//   rightEl.append(posterEl, taglineEl);
+//   parentEl.append(leftEl, rightEl);
 
-  ratStatEl.append(ratingEl, statusEl);
-  yeaGenEl.append(yearEl, genresEl);
-  leftTopEl.append(ratStatEl, yeaGenEl, titleEl, overviewEl, buttonEl);
-  leftEl.append(leftTopEl);
-  rightEl.append(posterEl, taglineEl);
-  parentEl.append(leftEl, rightEl);
+//   buttonEl.addEventListener("click", () => {
+//     window.open(plh.homepage, "_blank");
+//   });
 
-  buttonEl.addEventListener("click", () => {
-    window.open(plh.homepage, "_blank");
-  });
-
-  return parentEl;
-};
+//   return parentEl;
+// };

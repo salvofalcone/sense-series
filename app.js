@@ -1,6 +1,5 @@
 // ! API KEYS: 442ddf5ea1e360b32a7f5a8941b4a405
 // TODO aggiungere selezione lingua
-// TODO style input ricerca
 
 import {
   qS,
@@ -14,21 +13,18 @@ import {
 
 //==========================================================================
 
-let apiData = [];
-let localData = [];
+export let apiData = [];
+export let localData = [];
 export let genres = [];
-
-let language = "en-US"; //TODO scelta della lingua
-
-const BASE_URL = "https://api.themoviedb.org/3";
-const TYPE = "/trending";
-const home = qS(".main__title");
-const container = qS(".cards__container");
-const titleEl = qS(".section__title");
-const topRatedEl = qS("#topRated");
-const newestEl = qS("#newest");
-/* const todayEl = qS("#today"); */
-const searchEl = qS("#search");
+export let language = "en-US"; //TODO scelta della lingua
+export const BASE_URL = "https://api.themoviedb.org/3";
+export const TYPE = "/trending";
+export const home = qS(".main__title");
+export const container = qS(".cards__container");
+export const titleEl = qS(".section__title");
+export const topRatedEl = qS("#topRated");
+export const newestEl = qS("#newest");
+export const searchEl = qS("#search");
 
 //==========================================================================
 
@@ -51,45 +47,35 @@ const searchEl = qS("#search");
   });
 }; */
 
-const getGenres = () => {
+export const getGenres = () => {
   const genresEl = qS(".main__genres");
 
-  //! fatto con stefano
+  //* fatto con Stefano
   Object.entries(genres).forEach(([key, value]) => {
     const optionEl = createEl("li", value, {
       name: "value",
       value: key,
     });
-
-    // console.log(genres);
-
     genresEl.append(optionEl);
   });
 
-  // genres.forEach((el) => {
-  //   console.log(genres);
-  // });
-
   genresEl.addEventListener("click", (e) => {
     let endpoint = e.target.value;
+    //! sistemare questo
     homeByGenre(endpoint);
   });
 };
 
-const startApp = () => {
-  //fetch generi
+export const startApp = () => {
   fetch(`${BASE_URL}/genre/tv/list?language=${language}`, GET)
     .then((response) => response.json())
-    // .then((response) => {
-    //   response.genres.forEach((gen) => {
-    //     genres = { ...genres, [gen.id]: gen.name };
-
-    //     // genres.push({
-    //     //   id: gen.id,
-    //     //   name: gen.name,
-    //     // });
-    //   });
-    // })
+    .then((response) => {
+      //* per inserire i generi nella sidebar
+      response.genres.forEach((gen) => {
+        //! fatto con Stefano
+        genres = { ...genres, [gen.id]: gen.name };
+      });
+    })
     .then(() => {
       getGenres();
     })
@@ -127,8 +113,7 @@ const startApp = () => {
     .catch((err) => console.error(err));
 };
 
-// * cambio contenuto
-const updateData = () => {
+export const updateData = () => {
   apiData.forEach((element) => {
     localData.push({
       id: element.id,
@@ -148,7 +133,7 @@ const updateData = () => {
   });
 };
 
-const homeByGenre = (endpoint) => {
+export const homeByGenre = (endpoint) => {
   fetch(
     `https://api.themoviedb.org/3/tv/top_rated/?api_key=442ddf5ea1e360b32a7f5a8941b4a405&with_genres=${endpoint}`
   )
@@ -166,7 +151,7 @@ const homeByGenre = (endpoint) => {
     });
 };
 
-const homeByTopRated = () => {
+export const homeByTopRated = () => {
   fetch(
     `https://api.themoviedb.org/3/tv/top_rated?language=${language}&page=1`,
     GET
@@ -186,7 +171,7 @@ const homeByTopRated = () => {
     .catch((err) => console.error(err));
 };
 
-const homeByNewest = () => {
+export const homeByNewest = () => {
   fetch(
     `https://api.themoviedb.org/3/tv/on_the_air?language=${language}&page=1`,
     GET
@@ -206,7 +191,7 @@ const homeByNewest = () => {
     .catch((err) => console.error(err));
 };
 
-const homeBySearch = (searchInput) => {
+export const homeBySearch = (searchInput) => {
   fetch(
     `https://api.themoviedb.org/3/search/tv?query=${searchInput}&language=${language}&page=1
     `,
@@ -227,43 +212,11 @@ const homeBySearch = (searchInput) => {
     .catch((err) => console.error(err));
 };
 
-// export const createPage = (e) => {
-//   console.log(e.target);
-
-// };
-
-//TODO implementare funzionalità
-/* 
-const homeByToday = () => {
-  fetch(
-    `https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1`,
-    GET
-  )
-    .then((response) => response.json())
-    .then((response) => {
-      localData = [];
-      apiData = response.results;
-      updateData();
-    })
-    .then(() => {
-      removeAllChildNodes(container);
-      localData.forEach((element) => {
-        createCard(element);
-      });
-    })
-    .catch((err) => console.error(err));
-}; */
-
 //==========================================================================
 
 startApp();
 
 //==========================================================================
-
-// home.addEventListener("click", () => {
-//   removeAllChildNodes(container);
-//   startApp();
-// });
 
 topRatedEl.addEventListener("click", () => {
   titleEl.textContent = "Top Rated";
@@ -275,23 +228,8 @@ newestEl.addEventListener("click", () => {
   homeByNewest();
 });
 
-/* 
-  todayEl.addEventListener("click", () => {
-  titleEl.textContent="On air today"
-  homeByToday();
-  });
-*/
-
 searchEl.addEventListener("input", (e) => {
   if (e.target.value.length >= 4) {
     homeBySearch(e.target.value);
   }
 });
-
-//==========================================================================
-
-//fetch per generi
-// fetch("https://api.themoviedb.org/3/genre/tv/list?language=en", GET)
-//   .then((response) => response.json())
-//   .then((response) => console.log(response))
-//   .catch((err) => console.error(err));
