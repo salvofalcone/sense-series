@@ -165,7 +165,7 @@ export const genToString = (plh) => {
 
   allGens.forEach((el) => {
     if (plh === el.id) {
-      return el.name;
+      console.log(el.name);
     }
   });
 };
@@ -262,13 +262,21 @@ export const createPage = (plh) => {
     name: "class",
     value: "details__genres",
   });
+  const taglineEl = createEl("p", plh.tagline, {
+    name: "class",
+    value: "details__tagline",
+  });
 
   ratStatEl.append(ratingEl, statusEl);
   yeaGenEl.append(yearEl, genresEl);
   leftTopEl.append(ratStatEl, yeaGenEl, titleEl, overviewEl, buttonEl);
   leftEl.append(leftTopEl);
-  rightEl.append(posterEl);
+  rightEl.append(posterEl, taglineEl);
   parentEl.append(leftEl, rightEl);
+
+  buttonEl.addEventListener("click", () => {
+    window.open(plh.homepage, "_blank");
+  });
 
   return parentEl;
 };

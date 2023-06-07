@@ -32,7 +32,7 @@ const searchEl = qS("#search");
 
 //==========================================================================
 
-// ? decidere se avere i generi nella sidebar o nella navbar
+// TODO aggiungerlo per mobile
 /* const getGenres = () => {
   const genresEl = qS(".genres__main");
 
