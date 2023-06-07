@@ -2,10 +2,10 @@
 // TODO aggiungere selezione lingua
 
 import {
+  GET,
   qS,
   qSA,
   createEl,
-  GET,
   createCard,
   removeAllChildNodes,
   genToString,

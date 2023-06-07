@@ -55,20 +55,12 @@ export function createCard(plh) {
     value: "card__info__details",
   });
 
-  //! prendere genere da id
-  // const cardGenres = createEl("p", genres[plh.genres], {
-  //   name: "class",
-  //   value: "card__genres",
-  // });
-
-  // console.log(genToString(plh.genres));
-
+  //questo sotto è un id
   plh.genres.forEach((genre) => {
     const cardGenres = createEl("p", genToString(genre), {
       name: "class",
       value: "card__genres",
     });
-
     cardInfoDetails.append(cardGenres);
   });
 
@@ -106,8 +98,6 @@ export const getDetails = (plh) => {
     .then((response) => response.json())
     .then((data) => {
       /*
-      * archivio i dati che mi servono
-
       TODO posso rimuovere questo container e usare direttamente "data" da passare e salvare nel local storage => invoco la funzione nella nuova pagina e prendo i dati da local storage per stampare dettagli serie tv
       
       TODO al click per chiudere la finestra e tornare alla home devo svuotare il local storage - oppure svuoto subito dopo aver appeso? (forse scomodo se faccio refresh perché perdo tutto)
@@ -139,80 +129,12 @@ export const getDetails = (plh) => {
         vote_count: data.vote_count,
       };
 
-      //! devo salvare questo
-      createPage(data);
-      // window.open("./page.html", "_blank");
+      const archiveData = JSON.stringify(data);
+      localStorage.setItem("archive_data", archiveData);
+    })
+    .then(() => {
+      window.open(`./tv-series.html`, "_self");
+      // window.location.href = "./tv-series.html";
     })
     .catch((error) => console.log(error));
 };
-
-// //* questa dovrebbe andare nella pagina nuova
-// export const createPage = (plh) => {
-//   const parentEl = qS(".main__bottom");
-
-//   const leftEl = createEl("div", "", { name: "class", value: "left" });
-//   const rightEl = createEl("div", "", { name: "class", value: "right" });
-
-//   const posterEl = createEl(
-//     "img",
-//     "",
-//     {
-//       name: "src",
-//       value: "https://image.tmdb.org/t/p/original/" + plh.poster_path,
-//     },
-//     { name: "class", value: "poster__img" }
-//   );
-
-//   const leftTopEl = createEl("div", "", { name: "class", value: "left__top" });
-//   const ratStatEl = createEl("div", "", { name: "class", value: "lt__info" });
-//   const yeaGenEl = createEl("div", "", { name: "class", value: "lt__info" });
-//   const titleEl = createEl("h2", plh.original_name, {
-//     name: "class",
-//     value: "details__title",
-//   });
-//   const overviewEl = createEl("p", plh.overview, {
-//     name: "class",
-//     value: "details__overview",
-//   });
-//   const buttonEl = createEl("button", "guarda ora", {
-//     name: "class",
-//     value: "details__button",
-//   });
-
-//   const ratingEl = createEl("p", plh.vote_average, {
-//     name: "class",
-//     value: "details__rating",
-//   });
-//   const statusEl = createEl("p", plh.status, {
-//     name: "class",
-//     value: "details__status",
-//   });
-//   const yearEl = createEl("p", plh.first_air_date, {
-//     name: "class",
-//     value: "details__year",
-//   });
-
-//   //! fix
-//   const genresEl = createEl("p", plh.genres, {
-//     name: "class",
-//     value: "details__genres",
-//   });
-
-//   const taglineEl = createEl("p", plh.tagline, {
-//     name: "class",
-//     value: "details__tagline",
-//   });
-
-//   ratStatEl.append(ratingEl, statusEl);
-//   yeaGenEl.append(yearEl, genresEl);
-//   leftTopEl.append(ratStatEl, yeaGenEl, titleEl, overviewEl, buttonEl);
-//   leftEl.append(leftTopEl);
-//   rightEl.append(posterEl, taglineEl);
-//   parentEl.append(leftEl, rightEl);
-
-//   buttonEl.addEventListener("click", () => {
-//     window.open(plh.homepage, "_blank");
-//   });
-
-//   return parentEl;
-// };
