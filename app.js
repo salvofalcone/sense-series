@@ -32,7 +32,7 @@ const searchEl = qS("#search");
 
 //==========================================================================
 
-// TODO aggiungerlo per mobile
+// ? decidere se avere i generi nella sidebar o nella navbar
 /* const getGenres = () => {
   const genresEl = qS(".genres__main");
 
@@ -54,6 +54,7 @@ const searchEl = qS("#search");
 const getGenres = () => {
   const genresEl = qS(".main__genres");
 
+  //! fatto con stefano
   Object.entries(genres).forEach(([key, value]) => {
     const optionEl = createEl("li", value, {
       name: "value",
@@ -79,17 +80,16 @@ const startApp = () => {
   //fetch generi
   fetch(`${BASE_URL}/genre/tv/list?language=${language}`, GET)
     .then((response) => response.json())
-    .then((response) => {
-      response.genres.forEach((gen) => {
-        //! fatto con Stefano
-        genres = { ...genres, [gen.id]: gen.name };
+    // .then((response) => {
+    //   response.genres.forEach((gen) => {
+    //     genres = { ...genres, [gen.id]: gen.name };
 
-        // genres.push({
-        //   id: gen.id,
-        //   name: gen.name,
-        // });
-      });
-    })
+    //     // genres.push({
+    //     //   id: gen.id,
+    //     //   name: gen.name,
+    //     // });
+    //   });
+    // })
     .then(() => {
       getGenres();
     })
@@ -295,7 +295,3 @@ searchEl.addEventListener("input", (e) => {
 //   .then((response) => response.json())
 //   .then((response) => console.log(response))
 //   .catch((err) => console.error(err));
-
-
-
-

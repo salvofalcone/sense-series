@@ -46,6 +46,7 @@ export function createCard(plh) {
     value: "card__banner__img",
   });
 
+  //? corretto
   if (window.screen.width >= 768) {
     cardBannerImg.src = `https://image.tmdb.org/t/p/original/${plh.backdrop}`;
   } else {
@@ -63,9 +64,20 @@ export function createCard(plh) {
   });
 
   //! prendere genere da id
-  const cardGenres = createEl("p", plh.genres, {
-    name: "class",
-    value: "card__genres",
+  // const cardGenres = createEl("p", genres[plh.genres], {
+  //   name: "class",
+  //   value: "card__genres",
+  // });
+
+  // console.log(genToString(plh.genres));
+
+  plh.genres.forEach((genre) => {
+    const cardGenres = createEl("p", genToString(genre), {
+      name: "class",
+      value: "card__genres",
+    });
+
+    cardInfoDetails.append(cardGenres);
   });
 
   const cardRating = createEl("p", plh.rating, {
@@ -73,13 +85,12 @@ export function createCard(plh) {
     value: "card__rating",
   });
 
-  cardInfoDetails.append(cardGenres, cardRating);
+  cardInfoDetails.append(cardRating);
   cardInfo.append(cardTitle, cardInfoDetails);
   cardBanner.append(cardBannerImg);
   card.append(cardBanner, cardInfo);
   parent.append(card);
 
-  //! SIAMO QUI
   card.addEventListener("click", () => {
     let tvId = plh.id;
     getDetails(tvId);
@@ -95,83 +106,106 @@ export function removeAllChildNodes(parent) {
 }
 
 //!da sistemare
-export const genToString = (plh) => {
-  const allGens = [
-    {
-      id: 10759,
-      name: "Action & Adventure",
-    },
-    {
-      id: 16,
-      name: "Animation",
-    },
-    {
-      id: 35,
-      name: "Comedy",
-    },
-    {
-      id: 80,
-      name: "Crime",
-    },
-    {
-      id: 99,
-      name: "Documentary",
-    },
-    {
-      id: 18,
-      name: "Drama",
-    },
-    {
-      id: 10751,
-      name: "Family",
-    },
-    {
-      id: 10762,
-      name: "Kids",
-    },
-    {
-      id: 9648,
-      name: "Mystery",
-    },
-    {
-      id: 10763,
-      name: "News",
-    },
-    {
-      id: 10764,
-      name: "Reality",
-    },
-    {
-      id: 10765,
-      name: "Sci-Fi & Fantasy",
-    },
-    {
-      id: 10766,
-      name: "Soap",
-    },
-    {
-      id: 10767,
-      name: "Talk",
-    },
-    {
-      id: 10768,
-      name: "War & Politics",
-    },
-    {
-      id: 37,
-      name: "Western",
-    },
-  ];
-
-  allGens.forEach((el) => {
-    if (plh === el.id) {
-      console.log(el.name);
-    }
-  });
+const GENRES = {
+  10759: "Action & Adventure",
+  16: "Animation",
+  35: "Comedy",
+  80: "Crime",
+  99: "Documentary",
+  18: "Drama",
+  10751: "Family",
+  10762: "Kids",
+  9648: "Mystery",
+  10763: "News",
+  10764: "Reality",
+  10765: "Sci-Fi & Fantasy",
+  10766: "Soap",
+  10767: "Talk",
+  10768: "War & Politics",
+  37: "Western",
 };
 
-//!questo è da inserire come stampa della stringa genere
-// genToString(16);
+export const genToString = (id) => GENRES[id] || "Not found";
+
+// export const genToString = (plh) => {
+//   const allGens = [
+//     {
+//       id: 10759,
+//       name: "Action & Adventure",
+//     },
+//     {
+//       id: 16,
+//       name: "Animation",
+//     },
+//     {
+//       id: 35,
+//       name: "Comedy",
+//     },
+//     {
+//       id: 80,
+//       name: "Crime",
+//     },
+//     {
+//       id: 99,
+//       name: "Documentary",
+//     },
+//     {
+//       id: 18,
+//       name: "Drama",
+//     },
+//     {
+//       id: 10751,
+//       name: "Family",
+//     },
+//     {
+//       id: 10762,
+//       name: "Kids",
+//     },
+//     {
+//       id: 9648,
+//       name: "Mystery",
+//     },
+//     {
+//       id: 10763,
+//       name: "News",
+//     },
+//     {
+//       id: 10764,
+//       name: "Reality",
+//     },
+//     {
+//       id: 10765,
+//       name: "Sci-Fi & Fantasy",
+//     },
+//     {
+//       id: 10766,
+//       name: "Soap",
+//     },
+//     {
+//       id: 10767,
+//       name: "Talk",
+//     },
+//     {
+//       id: 10768,
+//       name: "War & Politics",
+//     },
+//     {
+//       id: 37,
+//       name: "Western",
+//     },
+//   ];
+
+//   console.log(plh);
+//   let genere = allGens.find((el) => el.id === plh[0]);
+//   return genere.name;
+
+//   // allGens.forEach((el) => {
+//   //   if (plh === el.id) {
+//   //     // console.log(el.name);
+//   //     return el.name;
+//   //   }
+//   // });
+// };
 
 export const getDetails = (plh) => {
   fetch(
@@ -206,7 +240,7 @@ export const getDetails = (plh) => {
         vote_count: data.vote_count,
       };
 
-      createPage(container);
+      createPage(data);
       // window.open("./page.html", "_blank");
     })
     .catch((error) => console.log(error));
@@ -258,10 +292,13 @@ export const createPage = (plh) => {
     name: "class",
     value: "details__year",
   });
+
+  //! fix
   const genresEl = createEl("p", plh.genres, {
     name: "class",
     value: "details__genres",
   });
+
   const taglineEl = createEl("p", plh.tagline, {
     name: "class",
     value: "details__tagline",
