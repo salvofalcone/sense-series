@@ -31,29 +31,8 @@ const edgeLogo = qS(".edge__logo");
 
 //==========================================================================
 
-// ? decidere se avere i generi nella sidebar o nella navbar
-/* const getGenres = () => {
-  const genresEl = qS(".genres__main");
-
-  genres.forEach((option) => {
-    const optionEl = createEl("option", option.name, {
-      name: "value",
-      value: option.id,
-    });
-
-    genresEl.append(optionEl);
-  });
-
-  genresEl.addEventListener("change", (e) => {
-    let endpoint = e.target.value;
-    homeByGenre(endpoint);
-  });
-}; */
-
 export const getGenres = () => {
   const genresEl = qS(".main__genres");
-
-  //* fatto con Stefano
   Object.entries(genres).forEach(([key, value]) => {
     const optionEl = createEl("li", value, {
       name: "value",
@@ -62,7 +41,6 @@ export const getGenres = () => {
     genresEl.append(optionEl);
   });
 
-  //! controllare
   genresEl.addEventListener("click", (e) => {
     let endpoint = e.target.value;
 
