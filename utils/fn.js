@@ -133,8 +133,7 @@ export const getDetails = (plh) => {
       localStorage.setItem("archive_data", archiveData);
     })
     .then(() => {
-      window.open(`./tv-series.html`, "_self");
-      // window.location.href = "./tv-series.html";
+      window.open(`./tv-series.html?=${plh}`, "_self");
     })
     .catch((error) => console.log(error));
 };

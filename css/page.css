@@ -108,6 +108,10 @@ button {
   justify-content: center;
 }
 
+.details__tagline {
+  padding-top: 20px;
+}
+
 .poster__img {
   border-radius: 2px;
   z-index: 2;
@@ -135,3 +139,12 @@ button {
   transform: scale(1.05);
   transition: 200ms ease;
 }
+
+/* DA SISTEAMARE QUESTA PARTE */
+/* .left__bottom {
+  border: 2px solid red;
+}
+
+.lb__trailer {
+  border: 2px solid orange;
+} */

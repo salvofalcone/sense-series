@@ -6,27 +6,6 @@ const createEl = (type, content, ...attrs) => {
   return element;
 };
 
-const genToString = (id) => allGenres[id] || "Not found";
-
-const allGenres = {
-  10759: "Action & Adventure",
-  16: "Animation",
-  35: "Comedy",
-  80: "Crime",
-  99: "Documentary",
-  18: "Drama",
-  10751: "Family",
-  10762: "Kids",
-  9648: "Mystery",
-  10763: "News",
-  10764: "Reality",
-  10765: "Sci-Fi & Fantasy",
-  10766: "Soap",
-  10767: "Talk",
-  10768: "War & Politics",
-  37: "Western",
-};
-
 //================================
 
 // 1. prendo i dati dal local storage e li salvo
@@ -38,9 +17,54 @@ const newData = JSON.parse(archiveData);
 //================================
 
 const createPage = (plh) => {
+  const GET = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NDJkZGY1ZWExZTM2MGIzMmE3ZjVhODk0MWI0YTQwNSIsInN1YiI6IjY0N2Q4Y2ZkY2FlZjJkMDBkZjg5ODc4MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mI0q_8Jcx9K8qcRJC_iXb87TBXiB1XC39maaxTGyvr8",
+    },
+  };
+
+  fetch(`https://api.themoviedb.org/3/tv/${plh.id}/videos?language=en-US`, GET)
+    .then((response) => response.json())
+    .then((response) => {
+      //qui mi prendo i dati che arrivano
+      let trailerDetails = [];
+      trailerDetails = Object.entries(response);
+
+      //qui divido i dati che mi arrivano
+      // let trailerDetailsID = trailerDetails[0][1];
+      let trailerDetailsRESULTS = trailerDetails[1][1];
+
+      trailerDetailsRESULTS.forEach((el) => {
+        let key = el.key;
+
+        const trailerEl = createEl(
+          "iframe",
+          "",
+          {
+            name: "class",
+            value: "lb__trailer",
+          },
+          {
+            name: "src",
+            value: `https://www.youtube.com/embed/${key}`,
+          }
+        );
+
+        /* <iframe width="560" height="315" src="https://www.youtube.com/embed/aN9DH_GxqEo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */
+
+        leftBottomEl.append(trailerEl);
+      });
+    })
+    .catch((err) => console.error(err));
+
   const parentEl = document.querySelector(".page__container");
+
   const leftEl = createEl("div", "", { name: "class", value: "left" });
   const rightEl = createEl("div", "", { name: "class", value: "right" });
+
   const closingEl = createEl("button", "x", {
     name: "class",
     value: "closing__el",
@@ -75,6 +99,11 @@ const createPage = (plh) => {
   );
 
   const leftTopEl = createEl("div", "", { name: "class", value: "left__top" });
+  const leftBottomEl = createEl("div", "", {
+    name: "class",
+    value: "left__bottom",
+  });
+
   const ratStatEl = createEl("div", "", { name: "class", value: "lt__info" });
   const yeaGenEl = createEl("div", "", { name: "class", value: "lt__info" });
   const titleEl = createEl("h2", plh.original_name, {
@@ -103,9 +132,9 @@ const createPage = (plh) => {
     value: "details__year",
   });
 
-  let pippo = plh.genres;
-  pippo.forEach((genre) => {
-    const genresEl = createEl("p", genToString(genre), {
+  let genresArr = Object.entries(plh.genres);
+  genresArr.forEach((genre) => {
+    const genresEl = createEl("p", genre[1].name, {
       name: "class",
       value: "details__genres",
     });
@@ -113,7 +142,7 @@ const createPage = (plh) => {
     yeaGenEl.append(genresEl);
   });
 
-  const taglineEl = createEl("p", plh.taglinep, {
+  const taglineEl = createEl("p", plh.tagline, {
     name: "class",
     value: "details__tagline",
   });
@@ -123,7 +152,7 @@ const createPage = (plh) => {
   ratStatEl.append(ratingEl, statusEl);
   yeaGenEl.append(yearEl);
   leftTopEl.append(ratStatEl, yeaGenEl, titleEl, overviewEl, buttonEl);
-  leftEl.append(leftTopEl);
+  leftEl.append(leftTopEl, leftBottomEl);
   rightEl.append(posterElShadow, posterEl, taglineEl, closingEl);
   parentEl.append(leftEl, rightEl);
 
@@ -133,7 +162,6 @@ const createPage = (plh) => {
 
   closingEl.addEventListener("click", () => {
     history.back();
-    console.log("ciao");
   });
   return parentEl;
 };
