@@ -1,25 +1,33 @@
 .info__section {
+  position: fixed;
+  width: 200px;
   color: var(--color-grey);
   /* text-transform: uppercase; */
-  position: relative;
 }
 
-.info__section ul {
+ul {
   list-style-type: none;
-  position: sticky;
-  top: calc(var(--nav-height) + 18px);
+}
+
+.info__title{
+  color: var(--color-white);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding-bottom: 8px;
+  cursor:default;
 }
 
 .info__section li {
-  padding-bottom: 6px;
+  padding-bottom: 4px;
 }
 
 .info__section li:hover {
   color: var(--color-white);
   cursor: pointer;
-  transition: 250ms ease;
+  transition: 350ms linear;
+  padding-left: 12px;
 }
 
-.categoryActive {
-  background-color: red;
+.activeGenre{
+  color: red;
 }

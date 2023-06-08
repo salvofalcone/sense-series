@@ -2,6 +2,7 @@
   --color-main: #18161c;
   --color-white: #ffffff;
   --color-grey: #525257;
+  --color-light-grey: #a6a6aa;
   --color-orange: #f36f45;
   --color-light-blue: #62d1e8;
   --color-violet: #866bff;
@@ -10,4 +11,19 @@
   --radius: 12px;
 
   --nav-height: 100px;
+}
+
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-grey);
+  border-radius: 12px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 12px;
+  background-color: #777777ef;
 }

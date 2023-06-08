@@ -1,0 +1,21 @@
+footer {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  padding: 12px;
+}
+
+footer a {
+  text-decoration: none;
+  color: #43edd4;
+  padding: 2px;
+}
+
+.edge__logo{
+    padding-top: 4px;
+    width: 60px;
+    cursor: pointer;
+}

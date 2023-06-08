@@ -29,15 +29,13 @@ const createPage = (plh) => {
   fetch(`https://api.themoviedb.org/3/tv/${plh.id}/videos?language=en-US`, GET)
     .then((response) => response.json())
     .then((response) => {
-      //qui mi prendo i dati che arrivano
       let trailerDetails = [];
       trailerDetails = Object.entries(response);
 
-      //qui divido i dati che mi arrivano
-      // let trailerDetailsID = trailerDetails[0][1];
       let trailerDetailsRESULTS = trailerDetails[1][1];
 
       trailerDetailsRESULTS.forEach((el) => {
+        //TODO fare check della presenza del video altrimenti metto albano che urla
         let key = el.key;
 
         const trailerEl = createEl(
@@ -52,8 +50,6 @@ const createPage = (plh) => {
             value: `https://www.youtube.com/embed/${key}`,
           }
         );
-
-        /* <iframe width="560" height="315" src="https://www.youtube.com/embed/aN9DH_GxqEo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */
 
         leftBottomEl.append(trailerEl);
       });
@@ -104,8 +100,14 @@ const createPage = (plh) => {
     value: "left__bottom",
   });
 
-  const ratStatEl = createEl("div", "", { name: "class", value: "lt__info" });
-  const yeaGenEl = createEl("div", "", { name: "class", value: "lt__info" });
+  const ratStatEl = createEl("div", "", {
+    name: "class",
+    value: "lt__info__rs",
+  });
+  const yeaGenEl = createEl("div", "", {
+    name: "class",
+    value: "lt__info__yg",
+  });
   const titleEl = createEl("h2", plh.original_name, {
     name: "class",
     value: "details__title",
@@ -119,22 +121,24 @@ const createPage = (plh) => {
     value: "details__button",
   });
 
-  const ratingEl = createEl("p", plh.vote_average, {
+  const ratingEl = createEl("p", `Rating: ${plh.vote_average}`, {
     name: "class",
     value: "details__rating",
   });
-  const statusEl = createEl("p", plh.status, {
+  const statusEl = createEl("p", `Status: ${plh.status}`, {
     name: "class",
     value: "details__status",
   });
-  const yearEl = createEl("p", plh.first_air_datep, {
+
+  let firstYear = plh.first_air_date.split("-");
+  const yearEl = createEl("p", firstYear[0], {
     name: "class",
     value: "details__year",
   });
 
   let genresArr = Object.entries(plh.genres);
   genresArr.forEach((genre) => {
-    const genresEl = createEl("p", genre[1].name, {
+    const genresEl = createEl("span", genre[1].name, {
       name: "class",
       value: "details__genres",
     });

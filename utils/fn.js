@@ -24,9 +24,7 @@ export const GET = {
   },
 };
 
-export function createCard(plh) {
-  const parent = qS(".cards__container");
-
+export function createCard(plh, root) {
   const card = createEl("div", "", { name: "class", value: "card" }); //* main single card
 
   const cardBanner = createEl("div", "", {
@@ -46,6 +44,7 @@ export function createCard(plh) {
   }
 
   const cardInfo = createEl("div", "", { name: "class", value: "card__info" });
+  const cardGenresMain = createEl("div", "", { name: "class", value: "card__genres__main" });
   const cardTitle = createEl("h4", plh.title, {
     name: "class",
     value: "card__title",
@@ -61,26 +60,26 @@ export function createCard(plh) {
       name: "class",
       value: "card__genres",
     });
-    cardInfoDetails.append(cardGenres);
+    cardGenresMain.append(cardGenres);
   });
 
-  const cardRating = createEl("p", plh.rating, {
+  const cardRating = createEl("p", `☆ ${plh.rating}`, {
     name: "class",
     value: "card__rating",
   });
 
-  cardInfoDetails.append(cardRating);
+  cardInfoDetails.append(cardGenresMain, cardRating);
   cardInfo.append(cardTitle, cardInfoDetails);
   cardBanner.append(cardBannerImg);
   card.append(cardBanner, cardInfo);
-  parent.append(card);
+  root.append(card);
 
   card.addEventListener("click", () => {
     let tvId = plh.id;
     getDetails(tvId);
   });
 
-  return parent; // ? corretto?
+  return root;
 }
 
 export function removeAllChildNodes(parent) {
@@ -97,38 +96,6 @@ export const getDetails = (plh) => {
   )
     .then((response) => response.json())
     .then((data) => {
-      /*
-      TODO posso rimuovere questo container e usare direttamente "data" da passare e salvare nel local storage => invoco la funzione nella nuova pagina e prendo i dati da local storage per stampare dettagli serie tv
-      
-      TODO al click per chiudere la finestra e tornare alla home devo svuotare il local storage - oppure svuoto subito dopo aver appeso? (forse scomodo se faccio refresh perché perdo tutto)
-      */
-
-      let container = {
-        id: data.id,
-        homepage: data.homepage,
-        backdrop_path: data.backdrop_path,
-        poster_path: data.poster_path,
-        first_air_date: data.first_air_date,
-        genres: data.genres,
-        created_by: data.created_by,
-        in_production: data.in_production,
-        languages: data.languages,
-        last_air_date: data.last_air_date,
-        networks: data.networks,
-        number_of_seasons: data.number_of_seasons,
-        number_of_episodes: data.number_of_episodes,
-        original_language: data.original_language,
-        original_name: data.original_name,
-        overview: data.overview,
-        production_companies: data.production_companies,
-        seasons: data.seasons,
-        spoken_languages: data.spoken_languages,
-        status: data.status,
-        tagline: data.tagline,
-        vote_average: data.vote_average,
-        vote_count: data.vote_count,
-      };
-
       const archiveData = JSON.stringify(data);
       localStorage.setItem("archive_data", archiveData);
     })
