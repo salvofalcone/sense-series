@@ -86,6 +86,7 @@
 
   .close__info {
     position: absolute;
+    display: block;
     top: 0;
     right: 0;
     border: none;
