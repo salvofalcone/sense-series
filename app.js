@@ -29,6 +29,10 @@ const attribution = qS(".header__attribution");
 const logoEl = qS(".main__title");
 const edgeLogo = qS(".edge__logo");
 
+const genOpening = qS(".show__info");
+const genClosing = qS(".close__info");
+const genContainer = qS(".info__section");
+
 //==========================================================================
 
 export const getGenres = () => {
@@ -222,4 +226,12 @@ attribution.addEventListener("click", () => {
 
 edgeLogo.addEventListener("click", () => {
   window.open("https://edgemony.com/", "_blank");
+});
+
+genOpening.addEventListener("click", () => {
+  genContainer.classList.add("open");
+});
+
+genClosing.addEventListener("click", () => {
+  genContainer.classList.remove("open");
 });

@@ -20,6 +20,10 @@ svg {
   height: 30px;
 }
 
+.show__info {
+  display: none;
+}
+
 .header__attribution {
   cursor: pointer;
 }

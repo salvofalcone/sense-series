@@ -1,0 +1,133 @@
+/* SMARTPHONE */
+@media screen and (max-width: 767px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  h2 {
+    margin: 0;
+    padding: 0;
+    padding-left: 12px;
+  }
+
+  /******************** HEADER ********************/
+  .header__attribution {
+    display: none;
+  }
+
+  header {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main__title {
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5rem;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .info__section {
+    margin: 8px;
+    z-index: 99;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.4px);
+    -webkit-backdrop-filter: blur(10.4px);
+    border: 1px solid rgba(0, 0, 0, 0.64);
+  }
+
+  /******************** MAIN ********************/
+  .main__section {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  .main__content {
+    margin: 0;
+    padding: 0;
+    padding-left: 4px;
+  }
+
+  .main__top__container,
+  .cards__container,
+  .main__bottom__container {
+    height: 450px;
+    border-bottom: 2px solid var(--color-grey);
+    scroll-snap-type: x mandatory;
+  }
+
+  .card {
+    width: 250px;
+    height: 400px;
+    padding: 12px;
+    box-shadow: none;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .card__banner,
+  .card__info {
+    width: 250px;
+  }
+
+  .close__info {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    color: var(--color-white);
+    padding: 12px;
+    background: none;
+    height: 24px;
+    z-index: 12;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  .info__section {
+    display: none;
+    transition: all 450ms;
+  }
+
+  .show__info {
+    display: block;
+    z-index: 99;
+    height: 24px;
+    background: none;
+    border: none;
+    position: absolute;
+    left: 24px;
+    fill: white;
+  }
+  .close {
+    display: none;
+    transition: all 450ms;
+  }
+
+  .open {
+    display: block;
+    transition: all 450ms;
+  }
+}
+
+/* TABLET */
+@media screen and (max-width: 1023px) {
+}
+
+/* media query desktop */
+/* @media screen and (min-width: 1025px) {
+  } */
