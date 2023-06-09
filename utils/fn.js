@@ -24,6 +24,7 @@ export const GET = {
   },
 };
 
+/* creation single card + event listener */
 export function createCard(plh, root) {
   const card = createEl("div", "", { name: "class", value: "card" }); //* main single card
 
@@ -36,7 +37,6 @@ export function createCard(plh, root) {
     value: "card__banner__img",
   });
 
-  //? corretto
   if (window.screen.width >= 768) {
     cardBannerImg.src = `https://image.tmdb.org/t/p/original/${plh.backdrop}`;
   } else {
@@ -82,6 +82,7 @@ export function createCard(plh, root) {
   return root;
 }
 
+/* clearing root element */
 export function removeAllChildNodes(parent) {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
@@ -90,6 +91,7 @@ export function removeAllChildNodes(parent) {
 
 export const genToString = (id) => genres[id] || "Not found";
 
+/* fetch for tv details (id) */
 export const getDetails = (plh) => {
   fetch(
     `https://api.themoviedb.org/3/tv/${plh}?api_key=442ddf5ea1e360b32a7f5a8941b4a405`

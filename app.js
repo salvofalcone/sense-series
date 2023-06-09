@@ -31,6 +31,7 @@ const genContainer = qS(".info__section");
 
 //==========================================================================
 
+/* creation genres list */
 export const getGenres = () => {
   const genresEl = qS(".main__genres");
   Object.entries(genres).forEach(([key, value]) => {
@@ -41,6 +42,7 @@ export const getGenres = () => {
     genresEl.append(optionEl);
   });
 
+  /* single genre's event listener */
   genresEl.addEventListener("click", (e) => {
     let endpoint = e.target.value;
 
@@ -51,11 +53,11 @@ export const getGenres = () => {
         li.classList.add("genActive");
       });
     });
-
     homeByGenre(endpoint);
   });
 };
 
+/* MAIN */
 export const startApp = () => {
   fetch(`${BASE_URL}/genre/tv/list?language=${language}`, GET)
     .then((response) => response.json())
@@ -158,6 +160,7 @@ export const updateData = () => {
   });
 };
 
+/* change content - genres */
 export const homeByGenre = (endpoint) => {
   fetch(
     `https://api.themoviedb.org/3/tv/top_rated/?api_key=442ddf5ea1e360b32a7f5a8941b4a405&with_genres=${endpoint}`
@@ -176,6 +179,7 @@ export const homeByGenre = (endpoint) => {
     });
 };
 
+/* change content - search result */
 export const homeBySearch = (searchInput) => {
   fetch(
     `https://api.themoviedb.org/3/search/tv?query=${searchInput}&language=${language}&page=1
@@ -199,6 +203,7 @@ export const homeBySearch = (searchInput) => {
 
 //==========================================================================
 
+/* all starts here */
 startApp();
 getGenres();
 
@@ -210,6 +215,7 @@ searchEl.addEventListener("input", (e) => {
   }
 });
 
+/* refresh page */
 logoEl.addEventListener("click", () => {
   location.reload();
 });
@@ -222,6 +228,7 @@ edgeLogo.addEventListener("click", () => {
   window.open("https://edgemony.com/", "_blank");
 });
 
+/* event listener for mobile version */
 genOpening.addEventListener("click", () => {
   genContainer.classList.add("open");
 });

@@ -6,15 +6,12 @@ const createEl = (type, content, ...attrs) => {
   return element;
 };
 
-//================================
+//==========================================================================
 
-// 1. prendo i dati dal local storage e li salvo
 const archiveData = localStorage.getItem("archive_data");
-
-// 2. li ritrasformo in oggetto
 const newData = JSON.parse(archiveData);
 
-//================================
+//==========================================================================
 
 const createPage = (plh) => {
   const GET = {
