@@ -1,5 +1,4 @@
 // ! API KEYS: 442ddf5ea1e360b32a7f5a8941b4a405
-// TODO aggiungere selezione lingua
 
 import {
   GET,
