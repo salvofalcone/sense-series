@@ -102,6 +102,10 @@
   .info__section {
     display: none;
     transition: all 450ms;
+    height: 80vh;
+    width: 60vw;
+    color: #ffffff;
+    font-size: 1.2rem;
   }
 
   .show__info {
@@ -112,7 +116,7 @@
     border: none;
     position: absolute;
     left: 24px;
-    fill: white;
+    fill: #ffffff;
   }
   .close {
     display: none;

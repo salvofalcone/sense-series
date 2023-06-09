@@ -1,5 +1,3 @@
-// ! API KEYS: 442ddf5ea1e360b32a7f5a8941b4a405
-
 import {
   GET,
   qS,
@@ -7,7 +5,6 @@ import {
   createEl,
   createCard,
   removeAllChildNodes,
-  // genToString,
 } from "./utils/fn.js";
 
 //==========================================================================
@@ -15,7 +12,7 @@ import {
 export let apiData = [];
 export let localData = [];
 export let genres = [];
-export let language = "en-US"; //TODO scelta della lingua
+export let language = "en-US";
 export const BASE_URL = "https://api.themoviedb.org/3";
 export const TYPE = "/trending";
 export const home = qS(".main__title");
@@ -114,7 +111,6 @@ export const startApp = () => {
       updateData();
     })
     .then(() => {
-      // removeAllChildNodes(container);
       const topRatedRoot = qS(".main__top__container");
       localData.forEach((element) => {
         createCard(element, topRatedRoot);
@@ -134,7 +130,6 @@ export const startApp = () => {
       updateData();
     })
     .then(() => {
-      // removeAllChildNodes(container);
       const newestRoot = qS(".main__bottom__container");
       localData.forEach((element) => {
         createCard(element, newestRoot);
