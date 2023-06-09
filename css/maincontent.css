@@ -1,7 +1,7 @@
 .main__content {
   border-radius: 12px;
   display: flex;
-  padding: 12px; /* ? forse più belo senza */
+  padding: 12px;
 }
 
 .main__section {
@@ -26,6 +26,7 @@
   gap: 12px;
   padding: 12px;
   overflow-x: scroll;
+  scroll-snap-type: x mandatory;
 }
 
 /* single card */
@@ -38,6 +39,8 @@
   cursor: pointer;
   border-radius: var(--radius);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .card:hover {
@@ -115,6 +118,6 @@
 }
 
 .genActive {
-  color: white;
+  color:#ffffff;
   text-transform: uppercase;
 }

@@ -83,6 +83,10 @@
   .card__info {
     width: 250px;
   }
+ 
+  .card__genres__main {
+    overflow-x: hidden;
+  }
 
   .close__info {
     position: absolute;
@@ -128,11 +132,3 @@
     transition: all 450ms;
   }
 }
-
-/* TABLET */
-@media screen and (max-width: 1023px) {
-}
-
-/* media query desktop */
-/* @media screen and (min-width: 1025px) {
-  } */

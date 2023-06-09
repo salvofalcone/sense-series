@@ -227,13 +227,3 @@ iframe {
     scroll-snap-stop: always;
   }
 }
-
-/* tablet */
-@media screen and (max-width: 1023px) {
-  .right {
-  }
-
-  .poster__img,
-  .poster__img__shadow {
-  }
-}

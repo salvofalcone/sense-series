@@ -35,7 +35,6 @@ const createPage = (plh) => {
       let trailerDetailsRESULTS = trailerDetails[1][1];
 
       trailerDetailsRESULTS.forEach((el) => {
-        //TODO fare check della presenza del video altrimenti metto albano che urla
         let key = el.key;
 
         const trailerEl = createEl(
@@ -108,7 +107,10 @@ const createPage = (plh) => {
     name: "class",
     value: "lt__info__yg",
   });
-  const titleEl = createEl("h2", plh.original_name, {
+
+  document.title = plh.name;
+
+  const titleEl = createEl("h2", plh.name, {
     name: "class",
     value: "details__title",
   });
@@ -116,12 +118,12 @@ const createPage = (plh) => {
     name: "class",
     value: "details__overview",
   });
-  const buttonEl = createEl("button", "Guarda ora", {
+  const buttonEl = createEl("button", "Watch now", {
     name: "class",
     value: "details__button",
   });
 
-  const ratingEl = createEl("p", `Rating: ${plh.vote_average}`, {
+  const ratingEl = createEl("p", `Vote: ${plh.vote_average}`, {
     name: "class",
     value: "details__rating",
   });
@@ -155,7 +157,7 @@ const createPage = (plh) => {
 
   ratStatEl.append(ratingEl, statusEl);
   yeaGenEl.append(yearEl);
-  leftTopEl.append(ratStatEl, yeaGenEl, titleEl, overviewEl, buttonEl);
+  leftTopEl.append(yeaGenEl, ratStatEl, titleEl, overviewEl, buttonEl);
   leftEl.append(leftTopEl, leftBottomEl);
   rightEl.append(posterElShadow, posterEl, taglineEl, closingEl);
   parentEl.append(leftEl, rightEl);
